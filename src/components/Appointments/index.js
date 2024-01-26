@@ -18,7 +18,7 @@ class Appointments extends Component {
     event.preventDefault()
     const {titleInput, dateInput} = this.state
     const formatedDate = dateInput
-      ? format(new Date(dateInput), 'dd-mm-yyy,EEEE')
+      ? format(new Date(dateInput), 'dd MMMM yyyy, EEEE')
       : ''
     const newAppointment = {
       id: v4(),
@@ -34,12 +34,10 @@ class Appointments extends Component {
   }
 
   onChangeTitleInput = event => {
-    const {titleInput} = this.state
     this.setState({titleInput: event.target.value})
   }
 
   onChangeDateInput = event => {
-    const {dateInput} = this.state
     this.setState({dateInput: event.target.value})
   }
 
@@ -91,6 +89,8 @@ class Appointments extends Component {
                   id="title"
                   placeholder="Title"
                   className="input"
+                  onChange={this.onChangeTitleInput}
+                  value={titleInput}
                 />
                 <label htmlFor="date" className="label">
                   DATE
@@ -98,8 +98,9 @@ class Appointments extends Component {
                 <input
                   type="date"
                   id="date"
-                  placeholder="dd/mm/yyyy"
                   className="input"
+                  onChange={this.onChangeDateInput}
+                  value={dateInput}
                 />
                 <button type="submit" className="add-button">
                   Add
